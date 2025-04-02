@@ -1,4 +1,4 @@
-package com.game.interfaces;
+	package com.game.interfaces;
 
 public interface Playable {
 	void launch();

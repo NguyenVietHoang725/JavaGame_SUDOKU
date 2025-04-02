@@ -1,13 +1,10 @@
 package com.game.model;
 
-import com.game.interfaces.Updatable;
-import com.game.interfaces.Validatable;
-
-public class Game implements Validatable, Updatable {
+public class Game {
 	// Attributes
 	private Node[][] board;
 	private static final int SIZE = 9;
-	
+
 	// Constructor
 	public Game(int[][] initialBoard) {
 		board = new Node[SIZE][SIZE];
@@ -17,28 +14,26 @@ public class Game implements Validatable, Updatable {
 			}
 		}
 	}
-	
-	
-	@Override
+
 	public void updateValue(int row, int col, int value) {
 		if (validate(row, col, value)) {
-			board[row][col].setValue(value);;
+			board[row][col].setValue(value);
+			;
 		}
 	}
 
-	@Override
 	public boolean validate(int row, int col, int value) {
 		// Check if this node was filled
-		if (board[row][col].getValue() != 0) return false;
-		
+		if (board[row][col].getValue() != 0)
+			return false;
+
 		// Check if this column or this row was filled this value
 		for (int i = 0; i < SIZE; i++) {
-			if (board[row][i].getValue() == value ||
-				board[i][col].getValue() == value) {
+			if (board[row][i].getValue() == value || board[i][col].getValue() == value) {
 				return false;
 			}
 		}
-		
+
 		// Check if this zone 3x3 was filled this value
 		int startRow = (row / 3) * 3;
 		int startCol = (col / 3) * 3;
@@ -52,8 +47,6 @@ public class Game implements Validatable, Updatable {
 		return true;
 	}
 
-
-	@Override
 	public boolean isSolved() {
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
@@ -65,10 +58,8 @@ public class Game implements Validatable, Updatable {
 		return true;
 	}
 
-
-	@Override
 	public Node[][] getBoard() {
 		return board;
 	}
-	
+
 }

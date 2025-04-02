@@ -27,7 +27,7 @@ public class SudokuController implements Playable {
 			int col = move[1];
 			int value = move[2];
 			
-			if (model.validate(row, col, value)) {
+			if (ip.validate(row, col, value) && model.validate(row, col, value)) {
 				model.updateValue(row, col, value);
 			} else {
 				view.showMessage("Invalid move. Enter again!");

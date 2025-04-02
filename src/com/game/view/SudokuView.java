@@ -1,11 +1,9 @@
 package com.game.view;
 
-import com.game.interfaces.Displayable;
 import com.game.model.Node;
 
-public class SudokuView implements Displayable {
+public class SudokuView {
 
-	@Override
 	public void displayBoard(Node[][] board) {
 		System.out.println("Sudoku Board:");
         for (int i = 0; i < 9; i++) {
@@ -19,7 +17,6 @@ public class SudokuView implements Displayable {
         System.out.println("+-------+-------+-------+");
 	}
 
-	@Override
 	public void showMessage(String message) {
 		System.out.println(message);
 	}
