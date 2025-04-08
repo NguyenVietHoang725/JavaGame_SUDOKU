@@ -1,16 +1,16 @@
-package com.game.controller;
+package com.sudoku.controller;
 
-import com.game.interfaces.Playable;
-import com.game.model.Game;
-import com.game.utils.InputUtils;
-import com.game.view.SudokuView;
+import com.sudoku.model.Game;
+import com.sudoku.interfaces.Playable;
+import com.sudoku.utils.InputHandler;
+import com.sudoku.view.SudokuView;
 
 public class SudokuController implements Playable {
 	private Game model;
 	private SudokuView view;
-	private InputUtils ip;
+	private InputHandler ip;
 	
-	public SudokuController(Game model, SudokuView view, InputUtils ip) {
+	public SudokuController(Game model, SudokuView view, InputHandler ip) {
         this.model = model;
         this.view = view;
         this.ip = ip;

@@ -1,12 +1,12 @@
-package com.game.utils;
+package com.sudoku.utils;
 
 import java.util.Scanner;
 
-public class InputUtils {
+public class InputHandler {
 
 	private Scanner scn;
 
-	public InputUtils() {
+	public InputHandler() {
 		scn = new Scanner(System.in);
 	}
 

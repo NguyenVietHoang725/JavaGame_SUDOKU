@@ -1,4 +1,4 @@
-package com.game.model;
+package com.sudoku.model;
 
 public class Node {
 	
@@ -8,6 +8,7 @@ public class Node {
 	
 	// Default Constructor
 	public Node(int x, int y, int value) {
+		super();
 		this.x = x;
 		this.y = y;
 		this.value = value;
@@ -37,5 +38,8 @@ public class Node {
 	public void setValue(int value) {
 		this.value = value;
 	}
+	
+	
+	
 	
 }

@@ -1,4 +1,4 @@
-	package com.game.interfaces;
+package com.sudoku.interfaces;
 
 public interface Playable {
 	void launch();

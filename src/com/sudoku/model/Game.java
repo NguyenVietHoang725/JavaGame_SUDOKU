@@ -1,4 +1,4 @@
-package com.game.model;
+package com.sudoku.model;
 
 public class Game {
 	// Attributes

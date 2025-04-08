@@ -1,6 +1,6 @@
-package com.game.view;
+package com.sudoku.view;
 
-import com.game.model.Node;
+import com.sudoku.model.Node;
 
 public class SudokuView {
 

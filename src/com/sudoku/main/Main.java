@@ -1,9 +1,9 @@
-package com.game.main;
+package com.sudoku.main;
 
-import com.game.controller.SudokuController;
-import com.game.model.Game;
-import com.game.utils.InputUtils;
-import com.game.view.SudokuView;
+import com.sudoku.model.Game;
+import com.sudoku.controller.SudokuController;
+import com.sudoku.utils.InputHandler;
+import com.sudoku.view.SudokuView;
 
 public class Main {
 	public static void main(String[] args) {
@@ -14,7 +14,7 @@ public class Main {
 
 		Game model = new Game(initialBoard);
 		SudokuView view = new SudokuView();
-		InputUtils ip = new InputUtils();
+		InputHandler ip = new InputHandler();
 		SudokuController controller = new SudokuController(model, view, ip);
 
 		controller.launch();
