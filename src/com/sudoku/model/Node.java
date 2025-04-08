@@ -5,13 +5,18 @@ public class Node {
 	// Attributes
 	private int x, y;
 	private int value;
+	private boolean isFixed = false;
 	
 	// Default Constructor
-	public Node(int x, int y, int value) {
+	public Node(int x, int y, int value, boolean isFixed) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.value = value;
+		
+		if (this.value != 0) {
+			isFixed = true;
+		}
 	}
 	
 	// Getters and Setters
@@ -37,6 +42,14 @@ public class Node {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+
+	public boolean isFixed() {
+		return isFixed;
+	}
+
+	public void setFixed(boolean isFixed) {
+		this.isFixed = isFixed;
 	}
 	
 	

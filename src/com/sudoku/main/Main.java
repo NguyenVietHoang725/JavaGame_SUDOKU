@@ -14,7 +14,7 @@ public class Main {
 
 		Game model = new Game(initialBoard);
 		SudokuView view = new SudokuView();
-		InputHandler ip = new InputHandler();
+		InputHandler ip = new InputHandler(model);
 		SudokuController controller = new SudokuController(model, view, ip);
 
 		controller.launch();

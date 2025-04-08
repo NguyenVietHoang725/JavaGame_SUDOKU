@@ -1,6 +1,7 @@
 package com.sudoku.controller;
 
 import com.sudoku.model.Game;
+import com.sudoku.model.Move;
 import com.sudoku.interfaces.Playable;
 import com.sudoku.utils.InputHandler;
 import com.sudoku.view.SudokuView;
@@ -21,14 +22,10 @@ public class SudokuController implements Playable {
 		while (!model.isSolved()) {
 			view.displayBoard(model.getBoard());
 			view.showMessage("Enter ur move (x, y, val) : ");
-			int[] move = ip.getInput();
+			Move move = ip.getMove();
 			
-			int row = move[0];
-			int col = move[1];
-			int value = move[2];
-			
-			if (ip.validate(row, col, value) && model.validate(row, col, value)) {
-				model.updateValue(row, col, value);
+			if (ip.validate(move) && model.validate(move)) {
+				model.updateValue(move);
 			} else {
 				view.showMessage("Invalid move. Enter again!");
 			}

@@ -2,24 +2,30 @@ package com.sudoku.utils;
 
 import java.util.Scanner;
 
+import com.sudoku.model.Move;
+import com.sudoku.model.Game;
+
 public class InputHandler {
 
 	private Scanner scn;
+	private Game game;
 
-	public InputHandler() {
+	public InputHandler(Game game) {
+		this.game = game;
 		scn = new Scanner(System.in);
 	}
 
-	public int[] getInput() {
+	public Move getMove() {
 		int row = scn.nextInt();
 		int col = scn.nextInt();
-		int value = scn.nextInt();
-
-		return new int[] { row - 1, col - 1, value };
+		int newVal = scn.nextInt();
+		int prevVal = game.getNode(row - 1, col - 1).getValue();
+		
+		return new Move(row - 1, col - 1, prevVal, newVal);
 	}
 
-	public boolean validate(int row, int col, int value) {
-		if (row < 0 || row > 8 || col < 0 || col > 8 || value < 1 || value > 9) {
+	public boolean validate(Move move) {
+		if (move.getRow() < 0 || move.getRow() > 8 || move.getCol() < 0 || move.getCol() > 8 || move.getNewVal() < 1 || move.getNewVal() > 9) {
 			return false;
 		}
 		return true;

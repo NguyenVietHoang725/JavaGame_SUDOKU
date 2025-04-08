@@ -1,28 +1,37 @@
 package com.sudoku.model;
 
+import java.util.Stack;
+
 public class Game {
 	// Attributes
 	private Node[][] board;
 	private static final int SIZE = 9;
+	private Stack<Move> undoStack = new Stack<>();
+	private Stack<Move> redoStack = new Stack<>();
 
 	// Constructor
 	public Game(int[][] initialBoard) {
 		board = new Node[SIZE][SIZE];
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
-				board[i][j] = new Node(i, j, initialBoard[i][j]);
+				boolean isFixed = false;
+				board[i][j] = new Node(i, j, initialBoard[i][j], isFixed);
 			}
 		}
 	}
 
-	public void updateValue(int row, int col, int value) {
-		if (validate(row, col, value)) {
-			board[row][col].setValue(value);
+	public void updateValue(Move move) {		
+		if (validate(move)) {
+			board[move.getRow()][move.getCol()].setValue(move.getNewVal());
 			;
 		}
 	}
 
-	public boolean validate(int row, int col, int value) {
+	public boolean validate(Move move) {
+		int row = move.getRow();
+		int col = move.getCol();
+		int value = move.getNewVal();
+		
 		// Check if this node was filled
 		if (board[row][col].getValue() != 0)
 			return false;
@@ -46,6 +55,14 @@ public class Game {
 		}
 		return true;
 	}
+	
+	public void undo() {
+		
+	}
+	
+	public void redo() {
+		
+	}
 
 	public boolean isSolved() {
 		for (int i = 0; i < SIZE; i++) {
@@ -61,5 +78,10 @@ public class Game {
 	public Node[][] getBoard() {
 		return board;
 	}
+	
+	public Node getNode(int row, int col) {
+	    return board[row][col];
+	}
+
 
 }
