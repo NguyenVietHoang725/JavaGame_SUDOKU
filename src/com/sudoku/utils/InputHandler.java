@@ -20,12 +20,27 @@ public class InputHandler {
 		int col = scn.nextInt();
 		int newVal = scn.nextInt();
 		int prevVal = game.getNode(row - 1, col - 1).getValue();
-		
+
 		return new Move(row - 1, col - 1, prevVal, newVal);
 	}
 
+	public int getAction() {
+		int action = scn.nextInt();
+
+		return action;
+	}
+	
+	public int[] getHintInput() {
+	    int row = scn.nextInt();
+	    int col = scn.nextInt();
+
+	    return new int[] { row - 1, col - 1 };
+	}
+
+
 	public boolean validate(Move move) {
-		if (move.getRow() < 0 || move.getRow() > 8 || move.getCol() < 0 || move.getCol() > 8 || move.getNewVal() < 1 || move.getNewVal() > 9) {
+		if (move.getRow() < 0 || move.getRow() > 8 || move.getCol() < 0 || move.getCol() > 8 || move.getNewVal() < 1
+				|| move.getNewVal() > 9) {
 			return false;
 		}
 		return true;

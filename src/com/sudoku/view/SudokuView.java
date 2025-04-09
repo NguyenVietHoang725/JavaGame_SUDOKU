@@ -20,5 +20,13 @@ public class SudokuView {
 	public void showMessage(String message) {
 		System.out.println(message);
 	}
-
+	
+	public void showSelectAction() {
+		showMessage("Select action (1/2/3): ");
+		showMessage("1. Enter a move.");
+		showMessage("2. Undo.");
+		showMessage("3. Redo.");
+		showMessage("4. Get hint.");
+		showMessage("Enter your action: ");
+	}
 }

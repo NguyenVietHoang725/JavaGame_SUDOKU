@@ -1,5 +1,7 @@
 package com.sudoku.model;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 public class Game {
@@ -20,10 +22,11 @@ public class Game {
 		}
 	}
 
-	public void updateValue(Move move) {		
+	public void updateValue(Move move) {
 		if (validate(move)) {
 			board[move.getRow()][move.getCol()].setValue(move.getNewVal());
-			;
+			undoStack.push(move); 
+			redoStack.clear(); 
 		}
 	}
 
@@ -31,7 +34,7 @@ public class Game {
 		int row = move.getRow();
 		int col = move.getCol();
 		int value = move.getNewVal();
-		
+
 		// Check if this node was filled
 		if (board[row][col].getValue() != 0)
 			return false;
@@ -55,14 +58,61 @@ public class Game {
 		}
 		return true;
 	}
-	
+
 	public void undo() {
-		
+		if (undoStack.isEmpty())
+			return;
+
+		Move lastMove = undoStack.pop();
+		board[lastMove.getRow()][lastMove.getCol()].setValue(lastMove.getPrevVal());
+		redoStack.push(lastMove);
+
+	}
+
+	public void redo() {
+		if (redoStack.isEmpty())
+			return;
+
+		Move move = redoStack.pop();
+		board[move.getRow()][move.getCol()].setValue(move.getNewVal());
+		undoStack.push(move);
 	}
 	
-	public void redo() {
-		
-	}
+	public Set<Integer> hint(int row, int col) {
+        Set<Integer> used = new HashSet<>();
+
+        if (board[row][col].getValue() != 0) {
+            return Set.of();
+        }
+
+        for (int i = 0; i < SIZE; i++) {
+            int val = board[row][i].getValue();
+            if (val != 0) used.add(val);
+        }
+
+        for (int i = 0; i < SIZE; i++) {
+            int val = board[i][col].getValue();
+            if (val != 0) used.add(val);
+        }
+
+        int startRow = (row / 3) * 3;
+        int startCol = (col / 3) * 3;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                int val = board[startRow + i][startCol + j].getValue();
+                if (val != 0) used.add(val);
+            }
+        }
+
+        Set<Integer> hintSet = new HashSet<>();
+        for (int i = 1; i <= 9; i++) {
+            if (!used.contains(i)) {
+                hintSet.add(i);
+            }
+        }
+
+        return hintSet;
+    }
 
 	public boolean isSolved() {
 		for (int i = 0; i < SIZE; i++) {
@@ -78,10 +128,9 @@ public class Game {
 	public Node[][] getBoard() {
 		return board;
 	}
-	
-	public Node getNode(int row, int col) {
-	    return board[row][col];
-	}
 
+	public Node getNode(int row, int col) {
+		return board[row][col];
+	}
 
 }
