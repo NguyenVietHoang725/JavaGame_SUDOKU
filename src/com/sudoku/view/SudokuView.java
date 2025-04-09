@@ -22,7 +22,7 @@ public class SudokuView {
 	}
 	
 	public void showSelectAction() {
-		showMessage("Select action (1/2/3): ");
+		showMessage("Select action (1/2/3/4): ");
 		showMessage("1. Enter a move.");
 		showMessage("2. Undo.");
 		showMessage("3. Redo.");
