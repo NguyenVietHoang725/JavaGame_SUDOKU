@@ -1,20 +1,22 @@
 package com.sudoku.model;
 
 public class Move {
-	
+
 	// Attributes
 	private int row, col;
-	private int prevVal;
-	private int newVal;
-	
-	public Move(int row, int col, int prevVal, int newVal) {
+	private int prevValue;
+	private int newValue;
+
+	// Constructor
+	public Move(int row, int col, int prevValue, int newValue) {
 		super();
 		this.row = row;
 		this.col = col;
-		this.prevVal = prevVal;
-		this.newVal = newVal;
+		this.prevValue = prevValue;
+		this.newValue = newValue;
 	}
 
+	// Getters and Setters
 	public int getRow() {
 		return row;
 	}
@@ -31,21 +33,20 @@ public class Move {
 		this.col = col;
 	}
 
-	public int getPrevVal() {
-		return prevVal;
+	public int getPrevValue() {
+		return prevValue;
 	}
 
-	public void setPrevVal(int prevVal) {
-		this.prevVal = prevVal;
+	public void setPrevValue(int prevValue) {
+		this.prevValue = prevValue;
 	}
 
-	public int getNewVal() {
-		return newVal;
+	public int getNewValue() {
+		return newValue;
 	}
 
-	public void setNewVal(int newVal) {
-		this.newVal = newVal;
+	public void setNewValue(int newValue) {
+		this.newValue = newValue;
 	}
-	
-	
+
 }

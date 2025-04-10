@@ -4,7 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-public class Game {
+import com.sudoku.interfaces.IValidate;
+
+public class Game implements IValidate {
+
 	// Attributes
 	private Node[][] board;
 	private static final int SIZE = 9;
@@ -21,60 +24,77 @@ public class Game {
 			}
 		}
 	}
-
+	
+	// Method : Update value from a move
 	public void updateValue(Move move) {
 		if (validate(move)) {
-			board[move.getRow()][move.getCol()].setValue(move.getNewVal());
-			undoStack.push(move); 
-			redoStack.clear(); 
+			board[move.getRow()][move.getCol()].setValue(move.getNewValue());
 		}
+		
+		// Push move to undoStack to archive 
+		undoStack.push(move);
+		// 
+		redoStack.clear();
 	}
 
+	// Method : Check valid/invalid move
+	@Override
 	public boolean validate(Move move) {
-		int row = move.getRow();
-		int col = move.getCol();
-		int value = move.getNewVal();
-
-		// Check if this node was filled
-		if (board[row][col].getValue() != 0)
+		return validateNode(move) && validateRowAndCol(move) && validateZone(move);
+	}
+	
+	// Sub method : Check node from move
+	public boolean validateNode(Move move) {
+		if (board[move.getRow()][move.getCol()].getValue() != 0) {
 			return false;
+		}
 
-		// Check if this column or this row was filled this value
+		return true;
+	}
+	
+	// Sub method : Check row and column from move
+	public boolean validateRowAndCol(Move move) {
 		for (int i = 0; i < SIZE; i++) {
-			if (board[row][i].getValue() == value || board[i][col].getValue() == value) {
+			if (board[move.getRow()][i].getValue() == move.getNewValue()
+					|| board[i][move.getCol()].getValue() == move.getNewValue()) {
 				return false;
 			}
 		}
 
-		// Check if this zone 3x3 was filled this value
-		int startRow = (row / 3) * 3;
-		int startCol = (col / 3) * 3;
+		return true;
+	}
+	
+	// Sub method : Check zone 3x3 from move
+	public boolean validateZone(Move move) {
+		int startRow = (move.getRow() / 3) * 3;
+		int startCol = (move.getCol() / 3) * 3;
+		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				if (board[startRow + i][startCol + i].getValue() == value) {
+				if (board[startRow + i][startCol + i].getValue() == move.getNewValue()) {
 					return false;
 				}
 			}
 		}
+		
 		return true;
 	}
-
+	
 	public void undo() {
-		if (undoStack.isEmpty())
+		if (undoStack.isEmpty()) 
 			return;
-
+		
 		Move lastMove = undoStack.pop();
-		board[lastMove.getRow()][lastMove.getCol()].setValue(lastMove.getPrevVal());
+		board[lastMove.getRow()][lastMove.getCol()].setValue(lastMove.getPrevValue());
 		redoStack.push(lastMove);
-
 	}
-
+	
 	public void redo() {
-		if (redoStack.isEmpty())
+		if (redoStack.isEmpty())  
 			return;
-
+		
 		Move move = redoStack.pop();
-		board[move.getRow()][move.getCol()].setValue(move.getNewVal());
+		board[move.getRow()][move.getCol()].setValue(move.getNewValue());
 		undoStack.push(move);
 	}
 	
@@ -113,7 +133,7 @@ public class Game {
 
         return hintSet;
     }
-
+	
 	public boolean isSolved() {
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
@@ -132,5 +152,8 @@ public class Game {
 	public Node getNode(int row, int col) {
 		return board[row][col];
 	}
-
+	
+	public int getSIZE() {
+		return SIZE;
+	}
 }

@@ -3,7 +3,7 @@ package com.sudoku.view;
 import com.sudoku.model.Node;
 
 public class SudokuView {
-
+	
 	public void displayBoard(Node[][] board) {
 		System.out.println("Sudoku Board:");
         for (int i = 0; i < 9; i++) {

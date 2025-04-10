@@ -7,7 +7,7 @@ public class Node {
 	private int value;
 	private boolean isFixed = false;
 	
-	// Default Constructor
+	// Constructor
 	public Node(int x, int y, int value, boolean isFixed) {
 		super();
 		this.x = x;
@@ -51,8 +51,6 @@ public class Node {
 	public void setFixed(boolean isFixed) {
 		this.isFixed = isFixed;
 	}
-	
-	
 	
 	
 }
