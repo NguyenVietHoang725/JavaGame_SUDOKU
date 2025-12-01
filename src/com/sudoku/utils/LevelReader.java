@@ -15,6 +15,7 @@ public class LevelReader {
     public int[][] readBoard() {
         int[][] board = new int[SIZE][SIZE];
         int row = 0;
+        
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -32,7 +33,7 @@ public class LevelReader {
 
             reader.close();
         } catch (IOException e) {
-            System.out.println("Lỗi đọc file: " + e.getMessage());
+            System.out.println("Read file error: " + e.getMessage());
         }
 
         return board;
